@@ -21,7 +21,7 @@ router.get('/api/accounts/count', async function (ctx){
 */
 
 router.get('/', async function (ctx){
-    const result =  "Hello World";
+    const result =  "Hello World!";
     ctx.body = result;
 });
 
