@@ -2,7 +2,10 @@ const Koa = require('koa');
 const Router = require('koa-router');
 const app = new Koa();
 
+const addressRoutes = require('./routes/addresses.js');
 const addressController = require('./controllers/addresses.js');
+
+const blockRoutes = require('./routes/blocks.js');
 const blockController = require('./controllers/blocks.js');
 
 var router = Router();
@@ -19,27 +22,27 @@ router.get('/', async function (ctx){
     ctx.body = result;
 });
 
-router.get('/addresses/:address', async function (ctx){
+router.get(addressRoutes.getAccountBalanceRoute(), async function (ctx){
     const result =  await addressController.getAccountBalance(ctx);
     ctx.body = result;
 });
 
-router.get('/blocks/latest', async function (ctx){
+router.get(blockRoutes.getLatestBlockRoute(), async function (ctx){
     const result =  await blockController.getLatestBlock(ctx);
     ctx.body = result;
 });
 
-router.get('/blocks/pending', async function (ctx){
+router.get(blockRoutes.getPendingBlocksRoute(), async function (ctx){
     const result =  await blockController.getPendingBlocks(ctx);
     ctx.body = result;
 });
 
-router.get('/blocks/identifier/:arg', async function (ctx){
+router.get(blockRoutes.getByHashOrNumberRoute(), async function (ctx){
     const result =  await blockController.getBlockByIdentifier(ctx);
     ctx.body = result;
 });
 
-router.get('/blocks/:from/:count', async function (ctx){
+router.get(blockRoutes.getMultipleBlocksAfterThresholdRoute(), async function (ctx){
     const result =  await blockController.getMultipleBlocksAfterThreshold(ctx);
     ctx.body = result;
 });
