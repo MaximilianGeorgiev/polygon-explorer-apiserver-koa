@@ -8,6 +8,9 @@ const addressController = require('./controllers/addresses.js');
 const blockRoutes = require('./routes/blocks.js');
 const blockController = require('./controllers/blocks.js');
 
+const transactionRoutes = require('./routes/transactions.js');
+const transactionController = require('./controllers/transactions.js');
+
 var router = Router();
 
 /*
@@ -44,6 +47,26 @@ router.get(blockRoutes.getByHashOrNumberRoute(), async function (ctx){
 
 router.get(blockRoutes.getMultipleBlocksAfterThresholdRoute(), async function (ctx){
     const result =  await blockController.getMultipleBlocksAfterThreshold(ctx);
+    ctx.body = result;
+});
+
+router.get(transactionRoutes.getLatestTransactionRoute(), async function (ctx){
+    const result = await transactionController.getLatestTransaction(ctx);
+    ctx.body = result;
+});
+
+router.get(transactionRoutes.getPendingTransactionsRoute(), async function (ctx){
+    const result = await transactionController.getPendingTransactions(ctx);
+    ctx.body = result;
+});
+
+router.get(transactionRoutes.getTransactionsByHashRoute(), async function (ctx){
+    const result = await transactionController.getTransactionByHash(ctx);
+    ctx.body = result;
+});
+
+router.get(transactionRoutes.getTransactionsCountByAddressRoute(), async function (ctx){
+    const result = await transactionController.getAddressTxCount(ctx);
     ctx.body = result;
 });
 
