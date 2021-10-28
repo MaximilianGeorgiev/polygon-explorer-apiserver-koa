@@ -26,6 +26,7 @@ exports.resolvePath = (connection, parsedMessage) => {
             transactionsController.returnLatestTransaction(connection);
         } else if (parsedMessage[2] === "hash") {
             if (parsedMessage.length === 4) {
+                console.log("test" + parsedMessage[3]);
                 transactionsController.returnTransactionByHash(connection, parsedMessage[3]);
             } else {
                 this.returnInvalidInput(connection);
